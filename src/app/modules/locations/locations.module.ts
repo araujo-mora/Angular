@@ -5,6 +5,7 @@ import { LocationsComponent } from './locations.component';
 import { CountriesComponent } from './countries/countries.component';
 import { CountriesService } from 'src/app/services/countries.service';
 import { HttpClientModule } from '@angular/common/http';
+import { AngularMaterialModule } from 'src/app/utils/angular-material/angular-material.module';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     CommonModule,
     LocationsRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    AngularMaterialModule,
   ],
   providers:[
     CountriesService

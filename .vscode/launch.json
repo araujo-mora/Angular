@@ -11,7 +11,7 @@
             "name": "Launch Chrome against localhost",
             "url": "http://localhost:4200",
             "webRoot": "${workspaceFolder}",
-            "sourceMaps": true,
+            "sourceMaps": false,
       
             //--SOMETIMES THIS IS NEEDED--
             "sourceMapPathOverrides": {
@@ -20,4 +20,3 @@
         }
     ]
   }
-  

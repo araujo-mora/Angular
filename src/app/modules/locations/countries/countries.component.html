@@ -1,1 +1,54 @@
-<p>countries works well!</p>
+<div class="container-fluid">
+  <ng-container *ngIf="countries$ | async as _countries">
+    <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-4">
+      <div *ngFor="let country of _countries" class="col-3 py-3">
+        <mat-card class="minH">
+          <mat-card-title class="text-dark font-weight-bold p-2">
+            <div>
+              <img class="h-15 w-15 rounded-sm"
+                [src]=" './assets/flags/'+country.cca3+'.svg' != null? './assets/flags/'+country.cca3+'.svg' : country.flags.svg"
+                alt="flag"/>
+              <span> {{ country.name.common}}</span>
+            </div>
+          </mat-card-title>
+          <mat-card-content>
+            <div class="container-fluid">
+              <!-- <span>Capital: {{country.capital}}</span> -->
+              <span>initials: {{country.cca3}}</span>
+
+              <!-- <div *ngIf="country.continents.lenght == 1 else elseContinent">
+                <span>Continent: {{country.continents[0]}} {{country.continents[0]}}</span>
+              </div>
+              <ng-template #elseContinent>
+                <span>Continents:</span>
+                <span *ngFor="let continent of country.continents">{{continent}}</span>
+              </ng-template>
+
+              <span>Area: {{country.area}}</span>
+
+              <div *ngIf="!(country.currencies.lenght > 0) else elseCurrency">
+                <span>{{country.currencies[0]}} {{country.currencies[0]}}</span>
+              </div>
+              <ng-template #elseCurrency>
+                <span>Currencies: </span>
+                <span *ngFor="let currency of country.currencies">{{currency}} - {{currency.name}}</span>
+              </ng-template>
+
+              <div *ngIf="country.languages.lenght == 1 else elseLanguage">
+                <span>{{country.languages[0]}} {{country.languages[0]}}</span>
+              </div>
+              <ng-template #elseLanguage>
+                <span>Languages: </span>
+                <span *ngFor="let lang of country.languages">{{lang}}</span>
+              </ng-template> -->
+
+              <!-- <span>Population: {{country.population}}</span> -->
+              
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </ng-container>
+</div>
+
