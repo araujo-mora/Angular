@@ -6,11 +6,15 @@ import { CountriesComponent } from './countries/countries.component';
 import { CountriesService } from 'src/app/services/countries.service';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularMaterialModule } from 'src/app/utils/angular-material/angular-material.module';
+import { DataRenderPipe } from '../pipes/data-render.pipe';
+import { DataShareService } from 'src/app/services/data-share.service';
+
 
 @NgModule({
   declarations: [
     LocationsComponent,
-    CountriesComponent
+    CountriesComponent,
+    DataRenderPipe,
   ],
   imports: [
     CommonModule,
@@ -19,7 +23,8 @@ import { AngularMaterialModule } from 'src/app/utils/angular-material/angular-ma
     AngularMaterialModule,
   ],
   providers:[
-    CountriesService
+    CountriesService,
+    DataShareService
   ]
 })
 export class LocationsModule { }

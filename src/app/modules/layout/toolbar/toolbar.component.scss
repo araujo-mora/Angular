@@ -1,0 +1,40 @@
+.sticky-toolbar{
+    width: 46px;
+    position: fixed;
+    top: 30%;
+    right: 0;
+    list-style: none;
+    margin: 0;
+    margin-top: 0px !important;
+    z-index: 95;
+    background: rgba(255, 255, 255, 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-top-left-radius: .42rem;
+    border-bottom-left-radius: .42rem;
+}
+
+.btn .btn-icon .btn-sm{
+    height: calc(1.35em + 1.1rem + 2px);
+    width: calc(1.35em + 1.1rem + 2px);
+}
+
+.btn .btn-bg-light{
+    background-color: #f3f6f9;
+    border-color: #f3f6f9;
+}
+
+.btn .btn-icon{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+  .btn-sm{
+    font-size: .925rem;
+    line-height: 1.35;
+    border-radius: .42rem;
+  }

@@ -1,54 +1,82 @@
-<div class="container-fluid">
-  <ng-container *ngIf="countries$ | async as _countries">
-    <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-4">
-      <div *ngFor="let country of _countries" class="col-3 py-3">
-        <mat-card class="minH">
-          <mat-card-title class="text-dark font-weight-bold p-2">
-            <div>
-              <img class="h-15 w-15 rounded-sm"
-                [src]=" './assets/flags/'+country.cca3+'.svg' != null? './assets/flags/'+country.cca3+'.svg' : country.flags.svg"
-                alt="flag"/>
-              <span> {{ country.name.common}}</span>
+<div *ngIf="!showList" class="container-fluid">
+  <div class="row row-cols-1 row-cols-xs-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-2 row-cols-xl-3 row-cols-xxl-3">
+    <div *ngFor="let country of _countries" class="col py-3">
+      <mat-card class="minH">
+        <mat-card-title class="text-dark font-weight-bold p-2">
+          <div>
+            <img class="h-15 w-15 rounded-sm"
+              [src]=" './assets/flags/'+country.cca3+'.svg' != null? './assets/flags/'+country.cca3+'.svg' : country.flags.svg"
+              alt="flag"/>
+            <span> {{ country.name}}</span>
+          </div>
+        </mat-card-title>
+        <mat-card-content>
+          <div class="container-fluid">
+            <div class="form-group mb-2 ml-2">
+              <span>Capital: {{country.capital | dataRender: 'capital'}}</span>
             </div>
-          </mat-card-title>
-          <mat-card-content>
-            <div class="container-fluid">
-              <!-- <span>Capital: {{country.capital}}</span> -->
-              <span>initials: {{country.cca3}}</span>
 
-              <!-- <div *ngIf="country.continents.lenght == 1 else elseContinent">
-                <span>Continent: {{country.continents[0]}} {{country.continents[0]}}</span>
-              </div>
-              <ng-template #elseContinent>
-                <span>Continents:</span>
-                <span *ngFor="let continent of country.continents">{{continent}}</span>
-              </ng-template>
-
-              <span>Area: {{country.area}}</span>
-
-              <div *ngIf="!(country.currencies.lenght > 0) else elseCurrency">
-                <span>{{country.currencies[0]}} {{country.currencies[0]}}</span>
-              </div>
-              <ng-template #elseCurrency>
-                <span>Currencies: </span>
-                <span *ngFor="let currency of country.currencies">{{currency}} - {{currency.name}}</span>
-              </ng-template>
-
-              <div *ngIf="country.languages.lenght == 1 else elseLanguage">
-                <span>{{country.languages[0]}} {{country.languages[0]}}</span>
-              </div>
-              <ng-template #elseLanguage>
-                <span>Languages: </span>
-                <span *ngFor="let lang of country.languages">{{lang}}</span>
-              </ng-template> -->
-
-              <!-- <span>Population: {{country.population}}</span> -->
-              
+            <div class="form-group mb-2 ml-2">
+              <span>Continent: &nbsp;</span>
+              <span *ngFor="let continent of country.continents">{{continent | dataRender : 'continent'}}</span>
             </div>
-          </mat-card-content>
-        </mat-card>
-      </div>
+
+            <div class="form-group mb-2 ml-2">
+              <span>Area: {{country.area | dataRender:'area'}}</span>
+            </div>
+
+            <div class="form-group mb-2 ml-2">
+              <span>Currency: &nbsp;</span>
+              <span *ngFor="let currency of country.currencies">{{currency | dataRender: 'currency'}}</span>
+            </div>
+            
+            <div class="form-group mb-2 ml-2">
+              <span>Population: {{country.population | dataRender: 'population'}}</span>
+            </div>
+
+          </div>
+        </mat-card-content>
+        <div class="row justify-content-end pr">
+          <a href="{{country.maps.googleMaps}}" target="_blank" class="text-decoration-none mx-1" mat-raised-button>View on Maps</a>
+          <button class="mx-2" mat-raised-button color="primary">More info...</button>
+        </div>
+      </mat-card>
     </div>
-  </ng-container>
+  </div>
 </div>
+
+
+<div *ngIf="showList" class="container-fluid">
+  <div class="row row-cols-1">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Country</th>
+          <th scope="col">Capital</th>
+          <th scope="col">Continent</th>
+          <th scope="col">Area</th>
+          <th scope="col">Currency</th>
+          <th scope="col">Population</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let country of _countries; index as i">
+          <th scope="row">{{i+1}}</th>
+          <td>
+            <img class="h-15 w-15 rounded-sm" [src]=" './assets/flags/'+country.cca3+'.svg' != null? './assets/flags/'+country.cca3+'.svg' : country.flags.svg" alt="flag"/>
+            <span> {{ country.name}}</span>
+          </td>
+          <td>{{country.capital | dataRender: 'capital'}}</td>
+          <td><span *ngFor="let continent of country.continents">{{continent | dataRender : 'continent'}}</span></td>
+          <td><span>{{country.area | dataRender:'area'}}</span></td>
+          <td><span *ngFor="let currency of country.currencies">{{currency | dataRender: 'currency'}}</span></td>
+          <td><span>{{country.population | dataRender: 'population'}}</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
 

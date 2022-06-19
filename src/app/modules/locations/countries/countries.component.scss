@@ -1,5 +1,5 @@
 .minH{
-    min-height: 250px;
+    min-height: 275px;
 }
 
 .h-15{
@@ -12,4 +12,20 @@
     width: 15% !important;
     min-width: 25px;
     max-width: 30px;
+}
+
+.container-fluid{
+    width: 90%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.mat-card-title{
+    min-height: 46px !important;
+}
+
+.mat-card-content{
+    font-size: 1rem;
 }
