@@ -8,12 +8,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { AngularMaterialModule } from 'src/app/utils/angular-material/angular-material.module';
 import { DataRenderPipe } from '../pipes/data-render.pipe';
 import { DataShareService } from 'src/app/services/data-share.service';
+import { ToolbarComponent } from '../layout/toolbar/toolbar.component';
 
 
 @NgModule({
   declarations: [
     LocationsComponent,
     CountriesComponent,
+    ToolbarComponent,
     DataRenderPipe,
   ],
   imports: [
