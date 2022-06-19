@@ -19,7 +19,5 @@ export class DataShareService {
 
   public shareView(flag: any) {
     this._flag.next(flag);
-    console.log(flag);
-    
   }
 }

@@ -10,6 +10,7 @@ export class DataRenderPipe implements PipeTransform {
     if (value == undefined || value == 'undefined') {
       this.output = "No data provided";
     }else{
+      this.output = value;
       if(type == 'area'){
         if(value < 10){
           var ha = value * 100;
@@ -33,6 +34,15 @@ export class DataRenderPipe implements PipeTransform {
       if(type == 'currency'){
         this.output = value;
       }
+
+      if(type == 'boolean'){
+        if(value == 'false'){
+          this.output = 'No';
+        }else{
+          this.output = "Yes"
+        }
+      }
+      
     }
     return this.output;
   }

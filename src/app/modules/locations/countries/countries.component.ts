@@ -4,6 +4,8 @@ import * as _ from 'lodash';
 import { CountryModel } from './country-model';
 import { DataShareService } from 'src/app/services/data-share.service';
 import { CountriesService } from 'src/app/services/countries.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalComponent } from '../../modal/modal.component';
 
 @Component({
   selector: 'app-countries',
@@ -19,6 +21,7 @@ export class CountriesComponent implements OnInit, OnDestroy {
   constructor( 
     public _countriesService: CountriesService,
     public _share: DataShareService,
+    public dialog: MatDialog
   ) { 
     const flagSubscription = this._share.flag$.subscribe(
       (flag)=>{
@@ -35,10 +38,15 @@ export class CountriesComponent implements OnInit, OnDestroy {
       (data)=>{
         var results = _.map(data, (country) =>{
           var curr:string[] = [];
+          var langs:string[] = [];
           for(var i in country.currencies){
-              curr.push(country.currencies[i].name);
+            curr.push(country.currencies[i].name);
+          }
+          for(var i in country.languages){
+            langs.push(country.languages[i]);
           }
           let option: CountryModel = {
+            id:country.name.official,
             name: country.name.common ? country.name.common : undefined,
             cca3: country.cca3 ? country.cca3 : undefined,
             independent: country.independent ? country.independent : undefined,
@@ -47,9 +55,9 @@ export class CountriesComponent implements OnInit, OnDestroy {
             altSpellings: country.altSpellings ? country.altSpellings : undefined,
             region: country.region ? country.region : undefined,
             subregion: country.subregion ? country.subregion : undefined,
-            languages: country.languages ? country.languages : undefined,
+            languages: langs.length > 0 ? langs : ['undefined'],
             latlng: country.latlng ? country.latlng: undefined,
-            borders: country.borders ? country.borders: undefined,
+            borders: country.borders ? country.borders: ['undefined'],
             area: country.area ? country.area: undefined,
             maps: {
               googleMaps: country.maps.googleMaps ? country.maps.googleMaps : undefined,
@@ -68,6 +76,53 @@ export class CountriesComponent implements OnInit, OnDestroy {
       }
     );
     this.unsubscribe.push(coutriesSubscription);
+  }
+
+  openDialog(event) {
+    var country = this.findRow(event.currentTarget.value, this._countries);
+    this.dialog.open(ModalComponent, {
+      data: {
+      id: country.id,
+      name:country.name,
+      cca3:country.cca3,
+      independent:country.independent,
+      currencies: country.currencies,
+      capital: country.capital,
+      altSpellings:country.altSpellings,
+      region:country.region,
+      subregion: country.subregion,
+      languages:country.languages,
+      latlng:country.latlng,
+      borders:country.borders,
+      area:country.area,
+      maps:{
+          googleMaps:country.maps.googleMaps,
+          openStreetMaps:country.maps.openStreetMaps
+      },
+      population:country.population,
+      timezones:country.timezones,
+      continents:country.continents,
+      },
+    });
+  }
+
+  findRow(rowId, data): CountryModel {
+    let rowSelected = _.find(data, (row: any) => {
+      return row.id === rowId;
+    });
+    if (!rowSelected) {
+      _.some(data, (datab: any) => {
+        if (!!datab.rows) {
+          rowSelected = this.findRow(rowId, datab.rows);
+        } else {
+          rowSelected = this.findRow(rowId, datab.children);
+        }
+        if (!!rowSelected) {
+          return true;
+        }
+      });
+    }
+    return rowSelected;
   }
 
   ngOnDestroy() {

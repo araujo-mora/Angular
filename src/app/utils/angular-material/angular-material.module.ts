@@ -6,7 +6,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-
+import { MatDialogModule } from '@angular/material/dialog'; 
 
 @NgModule({
   declarations: [],
@@ -17,7 +17,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatExpansionModule,
     MatTooltipModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatDialogModule
   ],
   exports:[
     MatSelectModule,
@@ -25,7 +26,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatExpansionModule,
     MatTooltipModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatDialogModule
   ]
 })
 export class AngularMaterialModule { }

@@ -1,4 +1,5 @@
 export interface CountryModel {
+    id:string,
     name:string,
     cca3:string,
     independent:boolean,
@@ -7,7 +8,7 @@ export interface CountryModel {
     altSpellings:[],
     region:string,
     subregion: string,
-    languages:[],
+    languages:any[],
     latlng:[],
     borders:[],
     area:number,

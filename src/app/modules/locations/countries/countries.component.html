@@ -5,7 +5,7 @@
         <mat-card-title class="text-dark font-weight-bold p-2">
           <div>
             <img class="h-15 w-15 rounded-sm"
-              [src]=" './assets/flags/'+country.cca3+'.svg' != null? './assets/flags/'+country.cca3+'.svg' : country.flags.svg"
+              [src]=" './assets/flags/'+country.cca3+'.svg'"
               alt="flag"/>
             <span> {{ country.name}}</span>
           </div>
@@ -26,8 +26,8 @@
             </div>
 
             <div class="form-group mb-2 ml-2">
-              <span>Currency: &nbsp;</span>
-              <span *ngFor="let currency of country.currencies">{{currency | dataRender: 'currency'}}</span>
+              <span>Currency(ies): &nbsp;</span>
+              <span *ngFor="let currency of country.currencies; index as i"><span *ngIf="i>0">/</span> {{currency | dataRender: 'currency'}} </span>
             </div>
             
             <div class="form-group mb-2 ml-2">
@@ -38,7 +38,7 @@
         </mat-card-content>
         <div class="row justify-content-end pr">
           <a href="{{country.maps.googleMaps}}" target="_blank" class="text-decoration-none mx-1" mat-raised-button>View on Maps</a>
-          <button class="mx-2" mat-raised-button color="primary">More info...</button>
+          <button [value]="country.id" (click)="openDialog($event)" class="mx-2" mat-raised-button color="primary">More info...</button>
         </div>
       </mat-card>
     </div>
@@ -58,6 +58,7 @@
           <th scope="col">Area</th>
           <th scope="col">Currency</th>
           <th scope="col">Population</th>
+          <th scope="col">Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -72,6 +73,8 @@
           <td><span>{{country.area | dataRender:'area'}}</span></td>
           <td><span *ngFor="let currency of country.currencies">{{currency | dataRender: 'currency'}}</span></td>
           <td><span>{{country.population | dataRender: 'population'}}</span></td>
+          <td><a href="{{country.maps.googleMaps}}" target="_blank" class="text-decoration-none mx-1" mat-raised-button>View on Maps</a>
+            <button [value]="country.id" (click)="openDialog($event)" class="mx-2" mat-raised-button color="primary">More info...</button></td>
         </tr>
       </tbody>
     </table>

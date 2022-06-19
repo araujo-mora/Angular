@@ -4,7 +4,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from './utils/angular-material/angular-material.module';
-import { DataShareService } from './services/data-share.service';
 
 @NgModule({
   declarations: [
@@ -16,7 +15,7 @@ import { DataShareService } from './services/data-share.service';
     BrowserAnimationsModule,
     AngularMaterialModule
   ],
-  providers: [DataShareService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

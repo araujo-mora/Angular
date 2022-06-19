@@ -1,0 +1,80 @@
+
+<h1 mat-dialog-title class="font-weight-bolder bg-gray">{{data.name}}</h1>
+<mat-dialog-content class="mat-typography">
+  <div class="row row-cols-1 row-cols-xl-2 xl">
+    <div class="col-8">
+      <div class="form-group mb-3 ml-5">
+        <span class="h4">Capital: </span>
+        <span class="h5">{{data.capital | dataRender: 'capital'}}</span>
+      </div>
+  
+      <div class="form-group mb-3 ml-5">
+        <span class="h4">Continent: &nbsp;</span>
+        <span class="h5">{{data.continents | dataRender : 'continent'}}</span>
+      </div>
+  
+      <div class="form-group mb-3 ml-5">
+        <span class="h4">Area: &nbsp;</span>
+        <span class="h5">{{data.area | dataRender:'area'}}</span>
+      </div>
+  
+      <div class="form-group mb-3 ml-5">
+        <span class="h4">Currency: &nbsp;</span>
+        <span class="h5" *ngFor="let currency of data.currencies; index as i"><span *ngIf="i>0">/</span> {{currency | dataRender: 'currency'}} </span>
+      </div>
+      
+      <div class="form-group mb-3 ml-5">
+        <span class="h4">Population: &nbsp;</span>
+        <span class="h5">{{data.population | dataRender: 'population'}}</span>
+      </div>
+
+      <div class="form-group mb-3 ml-5">
+        <span class="h4">Language(s): &nbsp;</span>
+        <span class="h5" *ngFor="let lang of data.languages; index as i"><span *ngIf="i>0">/</span> {{lang | dataRender: 'lang'}} </span>
+      </div>
+  
+      <div class="form-group mb-3 ml-5">
+        <span class="h4">Location: &nbsp;</span>
+        <span class="h5">{{data.latlng | dataRender: 'lang'}}</span>
+      </div>
+  
+      <div class="form-group mb-3 ml-5">
+        <span class="h4">Region: &nbsp;</span>
+        <span class="h5">{{data.region | dataRender: 'region'}}</span>
+      </div>
+
+      <div class="form-group mb-3 ml-5">
+        <span class="h4">Subregion: &nbsp;</span>
+        <span class="h5">{{data.subregion | dataRender: 'subregion'}}</span>
+      </div>
+
+      <div class="form-group mb-3 ml-5">
+        <span class="h4">Borders: &nbsp;</span>
+        <span class="h5" *ngFor="let border of data.borders; index as i">{{border | dataRender: 'border'}} <br *ngIf="(i+1)%3==0"/></span>
+      </div>
+
+      <div class="form-group mb-3 ml-5">
+        <span class="h4">Independet: &nbsp;</span>
+        <span class="h5" >{{data.independent | dataRender: 'boolean'}}</span>
+      </div>
+
+      <div class="form-group mb-3 ml-5">
+        <span class="h4">Timezone(s): &nbsp;</span>
+        <span class="h5" *ngFor="let time of data.timezones; index as i">{{time | dataRender: 'time'}}<br *ngIf="(i+1)%3==0"/></span>
+      </div>
+
+    </div>
+    <div class="col-4">
+      <img class="rounded-sm" [src]=" './assets/flags/'+data.cca3+'.svg'"  alt="flag"/>
+    </div>
+
+    
+    
+  </div>
+  
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Close</button>
+
+  <a href="{{data.maps.openStreetMaps}}" target="_blank" class="text-decoration-none mx-1" mat-raised-button color="primary">View details</a>
+</mat-dialog-actions>
