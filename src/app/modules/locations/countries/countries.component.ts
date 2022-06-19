@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import {  Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import * as _ from 'lodash';
 import { CountryModel } from './country-model';
@@ -8,22 +8,30 @@ import { CountriesService } from 'src/app/services/countries.service';
 @Component({
   selector: 'app-countries',
   templateUrl: './countries.component.html',
-  styleUrls: ['./countries.component.scss']
+  styleUrls: ['./countries.component.scss'],
 })
 export class CountriesComponent implements OnInit, OnDestroy {
 
   private unsubscribe: Subscription[] = [];
   _countries: any;
-  showList: boolean = true;
+  public showList: boolean;
 
   constructor( 
     public _countriesService: CountriesService,
     public _share: DataShareService,
-    private cd: ChangeDetectorRef
-  ) { }
+  ) { 
+    const flagSubscription = this._share.flag$.subscribe(
+      (flag)=>{
+        if(_.isBoolean(flag)){
+          this.showList = flag;
+        }
+      }
+    );
+    this.unsubscribe.push(flagSubscription);
+  }
 
   ngOnInit(): void {
-    var coutriesSubscription = this._countriesService.getAllCountries().subscribe(
+    const coutriesSubscription = this._countriesService.getAllCountries().subscribe(
       (data)=>{
         var results = _.map(data, (country) =>{
           var curr:string[] = [];
@@ -60,16 +68,6 @@ export class CountriesComponent implements OnInit, OnDestroy {
       }
     );
     this.unsubscribe.push(coutriesSubscription);
-
-    var flagSubscription = this._share.flag$.subscribe(
-      (flag)=>{
-        if(_.isBoolean(flag)){
-          this.showList = flag;
-          this.cd.detectChanges();
-        }
-      }
-    );
-    this.unsubscribe.push(flagSubscription);
   }
 
   ngOnDestroy() {

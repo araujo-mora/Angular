@@ -1,18 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { DataShareService } from 'src/app/services/data-share.service';
 
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.scss'],
-  providers: [DataShareService]
 })
-export class ToolbarComponent implements OnInit {
+export class ToolbarComponent {
   constructor(
     public _share: DataShareService,
   ) {}
-
-  ngOnInit(): void {}
 
   changeView(event) {
     if(event == 'false'){
